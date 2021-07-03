@@ -192,7 +192,7 @@ function submitValidation(e) {
         break;
     }
   }
-  checkFields();
+  checkFields(e);
   let validationInputs = checkFields(e) || true;
 
   // Check conditions d'utilisation avant envoi du formulaire
