@@ -16,7 +16,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("assets/images/bg_img.jpg");
+  background-image: url("../images/background.png");
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -585,18 +585,56 @@ footer {
   }
 }
 
-/*
-* Error messages form
-*/
-.errorMessage {
-  display: none;
-  align-items: center;
-  justify-content: center;
+/* Mise en forme pour les erreurs
+ */
+.error-input {
+  border: solid 2px red;
+}
+
+.error {
+  color: red;
+  font-size: small;
+}
+
+
+/* Submitted message
+ */
+.submittedMessage {
+  top: 0;
+  left: 0;
+  content: '';
+  color: #fff;
   position: absolute;
+  text-align: center;
+  background: #232324;
   width: 100%;
   height: 100%;
-  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 10000;
-  background: red;
-  content: '';
+  animation: anim 500ms ease forwards;
+}
+
+@keyframes anim {
+  0% {
+    top: 50%;
+    height: 0;
+    visibility: hidden;
+  }
+
+  100% {
+    top: 0;
+    height: 100%;
+    visibility: visible;
+  }
+}
+
+.closeBtnSubmit {
+  position: absolute;
+  bottom: 10px;
+  z-index: 10000;
+  justify-content: center;
+  text-align: center;
+  transform: translate(50%, -50%);
 }
