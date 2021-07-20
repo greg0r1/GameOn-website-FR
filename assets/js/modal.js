@@ -45,9 +45,11 @@ const bodyElt = document.querySelector('body');
  *
  */
 function launchModal() {
+    bodyElt.classList.add('fixed');
+    modalbg.className = "bground";
+    modalbg.classList.remove("bground-close");
     modalbg.style.display = "block";
     window.scrollTo(0, 0);
-    // bodyElt.style.position = "fixed";
 }
 
 // Launch modal event
@@ -58,8 +60,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
  * 
  */
 function closeModal() {
-    modalbg.style.display = "none";
-    bodyElt.style.position = "unset";
+    bodyElt.classList.remove('fixed');
+    modalbg.classList.add("bground-close");
+    setTimeout(() => modalbg.style.display = "none", 1000);
 }
 
 // The event added to the cross to close the modal window
@@ -195,7 +198,7 @@ function verifyFieldsBeforeSubmit(event) {
 
     if (!inputTypeCheckbox.checked) {
         inputsValidArray.push(false);
-        insertErrorMessage(event, '#checkbox1 ~ .error', "Vous devez vérifier que vous acceptez les termes et conditions.");
+        insertErrorMessage(event, '#checkbox1 ~ .error', "<br>Vous devez vérifier que vous acceptez les termes et conditions.");
         allIsValid = false
 
     } else {
