@@ -45,11 +45,10 @@ const bodyElt = document.querySelector('body');
  *
  */
 function launchModal() {
-    bodyElt.classList.add('fixed');
-    modalbg.className = "bground";
-    modalbg.classList.remove("bground-close");
-    modalbg.style.display = "block";
-    window.scrollTo(0, 0);
+    bodyElt.classList.add('fixed'); // ajoute la class "fixed" au body pour ne pas le scroller en mode responsive pour avoir accès au menu
+    modalbg.className = "bground"; // supprime la classe "bground-close" ajouté lors de la fermeture
+    modalbg.style.display = "block"; // affiche la fenêtre modale
+    window.scrollTo(0, 0); // remonte la page en haut si on a scrollé vers le bas
 }
 
 // Launch modal event
@@ -60,22 +59,22 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
  * 
  */
 function closeModal() {
-    bodyElt.classList.remove('fixed');
-    modalbg.classList.add("bground-close");
-    setTimeout(() => modalbg.style.display = "none", 1000);
+    bodyElt.classList.remove('fixed'); // le body n'est plus fixe
+    modalbg.classList.add("bground-close"); // animation lors de la fermeture
+    setTimeout(() => modalbg.style.display = "none", 300); // un délai qui laisse le temps à l'animation de faire son effet
 }
 
 // The event added to the cross to close the modal window
 modalClose.addEventListener("click", closeModal);
 
 // Definition of the rules of the patterns of the inputs
-const regExName = "[a-zA-Z]{3,}$"; // Regex who checks if the field has more than 3 characters
+const regExName = "[a-zA-Z]{3,}$"; // Regex qui vérifie si le champ a plus de 3 caractères
 inputFirstNameElt.pattern = regExName;
 inputLastNameElt.pattern = regExName;
-inputEmailElt.pattern = "[a-z0-9\-_]+[a-z0-9\.\-_]*@[a-z0-9\-_]{2,}\.[a-z\.\-_]+[a-z\-_]+"; // Regex who checks if the field has a valid email
-inputBirthdateElt.min = "1900-01-01" // Minimum date for the anniversary date
-inputBirthdateElt.max = "2015-01-01" // Maximum date for the anniversary date
-var inputCheckedElement = 0; // Value to 0 if no input radio is checked
+inputEmailElt.pattern = "[a-z0-9\-_]+[a-z0-9\.\-_]*@[a-z0-9\-_]{2,}\.[a-z\.\-_]+[a-z\-_]+"; // Regex qui vérifie si le champ a un email valide
+inputBirthdateElt.min = "1900-01-01" // Date minimale pour la date anniversaire
+inputBirthdateElt.max = "2015-01-01" // Date maximale pour la date anniversaire
+var inputCheckedElement = 0; // Valeur à 0 si aucune entrée radio n'est cochée
 
 /**
  * We check the validity of a field
@@ -118,8 +117,9 @@ function insertErrorMessage(event, selectorError, stringErrorMessage) {
  */
 function verifyInputCheckedElement() {
     for (let element of inputsTypeRadio) {
-        if (element.checked) {
-            inputCheckedElement++
+        if (element.checked === true) {
+            inputCheckedElement++;
+            console.log(inputCheckedElement)
         }
     }
 }
@@ -133,7 +133,7 @@ function verifyFieldsBeforeSubmit(event) {
 
     verifyInputCheckedElement();
 
-    var inputsValidArray = [];
+    var inputsValidArray = []; // tableau qui récupère les false et true, qui va servir à savoir si le formulaire est bien valide
 
     if (!inputFirstNameElt.validity.valid || inputFirstNameElt.value == "") {
 
@@ -186,7 +186,7 @@ function verifyFieldsBeforeSubmit(event) {
 
     }
 
-    if (inputCheckedElement === 0) {
+    if (!inputCheckedElement) {
         inputsValidArray.push(false);
         insertErrorMessage(event, '#location6 ~ .error', "Vous devez choisir une option");
 
@@ -214,7 +214,7 @@ function verifyFieldsBeforeSubmit(event) {
         let div = document.createElement('div');
         div.classList.add('submittedMessage');
         formElt.insertBefore(div, document.querySelector('.formData'));
-        div.innerHTML = "Merci d\'avoir soumis vos informations d\'inscription";
+        div.innerHTML = "Merci!<br>Votre réservation a été reçue.";
         inputSubmitElt.value = "Fermer";
         inputSubmitElt.classList.add('closeBtnSubmit');
         inputSubmitElt.addEventListener('click', () => {

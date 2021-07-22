@@ -174,10 +174,6 @@ img {
     border-radius: 10px 10px 0 0;
   }
 
-  form#validate div {
-    margin: 10px 5px;
-  }
-
   .hero-content {
     min-width: fit-content;
     padding: 0;
@@ -204,8 +200,6 @@ img {
   }
 
   .bground-close {
-    display: none;
-    width: 100%;
     animation: modalopenResonsiveClose 200ms ease forwards;
   }
 
