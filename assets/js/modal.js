@@ -68,7 +68,7 @@ function closeModal() {
 modalClose.addEventListener("click", closeModal);
 
 // Definition of the rules of the patterns of the inputs
-const regExName = "[a-zA-Z]{3,}$"; // Regex qui vérifie si le champ a plus de 3 caractères
+const regExName = "[a-zA-Z-\u00C0-\u024F\u1E00-\u1EFF\s]{3,}$"; // Regex qui vérifie si le champ a plus de 3 caractères, les accents, et espaces des noms composés
 inputFirstNameElt.pattern = regExName;
 inputLastNameElt.pattern = regExName;
 inputEmailElt.pattern = "[a-z0-9\-_]+[a-z0-9\.\-_]*@[a-z0-9\-_]{2,}\.[a-z\.\-_]+[a-z\-_]+"; // Regex qui vérifie si le champ a un email valide
